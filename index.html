@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(341fr);
+            grid-gap: 10px;
+            max-width: 400px;
+            border: 2px solid black;
+            padding: 15px;
+            box-shadow: 12px 12px 0px 0px rgb(205, 205, 205);
+        }
+
+
+        .mainDisplay {
+            grid-column: span 4;
+            width: 210px;
+            background-color: #eee;
+            padding: 20px;
+            font-size: 2rem;
+            border: 2px solid #2cf091;
+            overflow-x: scroll;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: #00ff11;
+            border-radius: 5px;
+        }
+
+        #zero {
+            grid-column: 3 span;
+        }
+
+        button:active {
+            background-color: #05cd19;
+        }
+
+        #clear {
+            background-color: rgb(255 127 87);
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Name : Aakrant Koparkar
+      Project : Simple Calculator -->
+
+    <div class="main">
+
+        <div class="container">
+
+            <div class="mainDisplay" id="mainDisplay">0</div>
+            <button id="clear" onclick="clearDisplay()">C</button>
+            <button onclick="addToDisplay('/')">/</button>
+            <button onclick="addToDisplay('*')">*</button>
+            <button onclick="removeFromDisplay()">X</button>
+            <button onclick="addToDisplay('7')">7</button>
+            <button onclick="addToDisplay('8')">8</button>
+            <button onclick="addToDisplay('9')">9</button>
+            <button onclick="addToDisplay('+')">+</button>
+
+            <button onclick="addToDisplay('4')">4</button>
+            <button onclick="addToDisplay('5')">5</button>
+            <button onclick="addToDisplay('6')">6</button>
+            <button onclick="addToDisplay('-')">-</button>
+
+            <button onclick="addToDisplay('1')">1</button>
+            <button onclick="addToDisplay('2')">2</button>
+            <button onclick="addToDisplay('3')">3</button>
+
+            <button onclick="addToDisplay('.')">.</button>
+
+      
+            <button id="zero" onclick="addToDisplay('0')">0</button>
+            <button onclick="Result()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let displayValue = '0';
+        let displayEl = document.getElementById('mainDisplay');
+
+        function updateDisplayValue() {
+            displayEl.innerText = displayValue;
+        }
+
+        function addToDisplay(value) {
+            if (displayValue === '0') {
+                displayValue = value;
+            } else {
+                displayValue += value;
+            }
+            updateDisplayValue();
+        }
+
+        function clearDisplay() {
+            displayValue = '0';
+            updateDisplayValue();
+        }
+
+        function removeFromDisplay(){
+            displayValue = displayValue.slice(0,-1);
+            updateDisplayValue();
+            if(displayValue===''){
+                displayValue='0';
+                updateDisplayValue();
+            }
+        }
+
+        function Result() {
+            try {
+                displayValue = eval(displayValue).toString();
+                updateDisplayValue();
+            } catch (error) {
+                displayValue = 'Error';
+                updateDisplayValue();
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
